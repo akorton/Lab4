@@ -1,0 +1,216 @@
+@startuml
+
+
+class God{
+    God();
+    --
+    void toCreate(Creatable c);
+    void destroy(Destroyable d);
+    void change(Changable c);
+}
+
+abstract class Nature implements Creatable{
+    private String name;
+    --
+    Nature();
+    Nature(String name);
+    String getName();
+}
+
+class Trees extends Nature{
+    Trees();
+    --
+    void getGrowFrom(String to);
+}
+
+
+class Mountains extends Nature{
+    Mountains();
+    --
+    void toBreakUp(String s);
+}
+
+abstract class Troll implements Creatable,Watchable, Surroundable {
+    private String name;
+    --
+    Troll();
+    Troll(String name);
+    --
+    String getName();
+    String toWatch(String s);
+    String Surround(Troll r, String s);
+    void watchAt(Watchable w, String s);
+}
+
+class Mama extends Troll{
+    Mama();
+    --
+    void watchAt(Watchable w);
+    void thinkAbout(Thinkable th);
+    void remember(Rememberable r);
+    void toDoubt(Doubts d);
+    String getName();
+    --
+}
+
+class Thoughts{
+        private String name;
+
+        Thoughts();
+        Thoughts(String name);
+
+        void returnWithThoughts(Returnable r);
+}
+
+Mama *-- Thoughts
+
+class BabyMu extends Troll{
+    BabyMu(String name);
+    --
+    void getPlacedTo(String s);
+}
+
+class Mumla extends Troll{
+    Mumla(String name);
+    --
+    void holdTrolls(Trolls t);
+}
+
+class Papa extends Troll{
+    Papa(String name);
+    --
+    void watchAt(Watchable w);
+    void nod();
+    void hideIn(String s);
+    void returnWith(String s);
+    void work();
+}
+
+'Крыльцо
+class Porch implements Watchable{
+    private boolean tobe = True;
+    private String leadTo;
+    --
+    Porch();
+    Porch(boolean, tobe, String leadTo);
+    --
+    String getLeadTo();
+    boolean getToBeOrNotToBe();
+    void changeBeing();
+    Reasons reasonNotToBe();
+    String toWatch();
+}
+
+class Saray implements Creatable{
+    private String name;
+    --
+    Saray(String name);
+    void sink();
+    String getName();
+    --
+}
+
+class PieceOfRoof implements Clingable{
+        private String name;
+        public PieceOfRoof(String name);
+        public void raiseUpon(String s);
+        public String getName();
+}
+Saray o-- PieceOfRoof
+
+
+enum Reasons{
+    private String reason;
+    --
+    HIDEINWATER();
+    WASSTOLE();
+    WASEATEN();
+    --
+    Reasons(String Reason);
+    public String getReason();
+}
+
+enum Doubts{
+    private String doubt;
+    --
+    TOGETTOKITCHEN();
+    DONTFORGET();
+    ISEVERYTHINGOKEY();
+    --
+    Doubts(String doubt);
+    String getDoubt();
+}
+
+class Wardrobe implements Rememberable, Returnable{
+    private String inside;
+    --
+    Wardrobe();
+    Wardrobe(String inside);
+    String toRemember();
+    String toReturn();
+}
+
+interface Surroundable{
+    void Surround(Troll t, String s);
+}
+
+interface Watchable{
+    String toWatch(String s);
+}
+
+interface Thinkable{
+    String toThink(String s);
+}
+
+interface Rememberable{
+    String toRemember(String s);
+}
+
+interface Creatable{
+    default String getCreated();
+    String getName();
+}
+
+interface Returnable{
+    String toReturn();
+}
+
+
+interface Changable{
+    String toChange();
+}
+
+interface Destroyable{
+    String toDestroy();
+}
+
+interface makeDestroyable{
+    Destroyable make(String name);
+}
+
+interface Clingable{
+    String toCling(String s);
+}
+
+class Main{
+    public static void main(String... args);
+    --
+}
+
+class PapaCantWorkHeIsSleeping extends Exception{
+    PapaCantWorkHeIsSleeping();
+    PapaCantWorkHeIsSleeping(String message);
+    PapaCantWorkHeIsSleeping(String message, Throwable cause);
+    PapaCantWorkHeIsSleeping(Throwable cause);
+    PapaCantWorkHeIsSleeping(String message, Throwable cause, boolean EnableSuppression, boolean writableStackTrace);
+}
+
+class WorldWasDestroyed extends RuntimeException{
+    WorldWasDestroyed();
+    WorldWasDestroyed(String message);
+    WorldWasDestroyed(String message, Throwable cause);
+    WorldWasDestroyed(Throwable cause);
+    WorldWasDestroyed(String message, Throwable cause, boolean EnableSuppression, boolean writableStackTrace);
+}
+
+@enduml
